@@ -1,0 +1,70 @@
+"""
+Take avg. temperatures and relative humidity from two files
+to compute the specific humidity of both:
+e = 0.001 * 6.112 * RH * exp((17.67*T)/(T+243.5))
+q = 0.622 * (e/(p-e)) * 1000
+p = 1013 hPa
+[T] = Celsius
+
+Pay attention to the file formatting and to the column to discard:
+discard non averaged temperatures and dew point
+
+Check for lines with not matching date and time
+
+Output in a new file: date time T1 T2 RH1 RH2 q1 q2
+where 1 and 2 are relative to the respective files at same date and time
+"""
+
+def variables:
+    file1, int: unitR1, filestatus_1, code_1    
+    file1, int: unitR2, filestatus_2, code_2, n_lines
+    file_write, int: unitW, filestatus_3
+    file, str: filename_1, filename_2, io_msg, line
+    file, bool: filecheck  # inquire
+    str: datetime_1, datetime_2
+    float: T1, T2, RH1, RH2, SH1, SH2
+
+def specHum(T, RH) -> SH:
+    float: SH, e
+    int, par. : p=1013
+
+    e = 0.01 * 6.112 * RH * EXP((17.67*T)/(T+243.5))
+    SH = 0.622 * (e/(p-e)) * 1000
+
+if not open(file1, OLD) or not input(file2, OLD):
+    prompt error
+    return
+if not open(file_write, REPLACE):
+    prompt error
+    return
+
+# read the two headers
+code1, code2 = read(file1, file2)
+skip header line
+
+# write output file header
+write(file_write) 'Specific Humidity from ', code1, 'and', code2
+# read from files until one reaches the end
+while (file_status_1 == 0 and file_status_2 == 0):
+    date1, time1, T1, RH1 = read(file1)     
+    date2, time2, T2, RH2 = read(file2)
+    if date1 != date2 or time1 != time 2:
+        write 'Error: not matching lines'
+        return
+    # compute the specific humidity
+    q1 = spec_hum(T1,RH1)
+    q2 = spec_hum(T2,RH2)
+    write(file_write) date1, time1, T1, T2, RH1, RH2, q1, q2
+    
+# check that both files have same length
+if file_status_1:
+    line = read(file1)
+    if len(line) > 10:
+        write 'Error: file1 longer than file2'
+
+ if file_status_2:
+    line = read(file2)
+    if len(line) > 10:
+        write 'Error: file2 longer than file1'
+
+   

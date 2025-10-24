@@ -1,0 +1,20 @@
+while True:
+    input('output file name, or q to exit')
+    if q:
+        exit
+    if file name exists:
+        input('trunk the file?')
+        if trunk:
+            if open with trunk:
+                exit
+            else:
+                prompt error
+                continue
+        else:
+            continue
+    else:
+        if open as new file:
+            exit
+        else:
+            prompt error
+            continue

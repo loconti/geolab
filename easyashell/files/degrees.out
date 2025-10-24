@@ -1,0 +1,10 @@
+ Conversion from radians to degrees
+ radians -> rounds, degrees, minutes, integer seconds (rounded)
+   1.23399997     ->           0 round          70 degrees          42 minutes          11 seconds
+   3.12450004     ->           0 round         179 degrees           1 minutes          14 seconds
+  0.100000001     ->           0 round           5 degrees          43 minutes          46 seconds
+   7.98743486     ->           1 round         456 degrees          38 minutes          47 seconds
+   3.14159012     ->           0 round         179 degrees          59 minutes          60 seconds
+   11.2299995     ->           1 round         642 degrees          25 minutes          54 seconds
+   8.24600029     ->           1 round         471 degrees          27 minutes          40 seconds
+   2.00000000     ->           0 round         114 degrees          35 minutes          30 seconds

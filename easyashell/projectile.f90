@@ -2,8 +2,9 @@ PROGRAM projectile
 IMPLICIT NONE
 ! Posizione velocita' e massima altezza di un proiettile dopo un tempo t
 ! lanciato con velocita' u da terra con angolo alpha
-REAL :: alpha, t, u, g=9.81  ! gradi, secondi, m/s, m/s^2
-REAL :: deg2rad=3.14159265358/180.0  ! rad = gradi * deg2rad
+REAL :: alpha, t, u  ! gradi, secondi, m/s
+REAL, PARAMETER :: g=9.81  ! m/s^2
+REAL, PARAMETER :: deg2rad=3.14159265358/180.0  ! rad = gradi * deg2rad
 REAL :: x, y, vx, vy, v, theta, ymax
 READ (*,*) alpha, t, u  ! 35 3.81 41.7
 alpha = alpha * deg2rad  ! angolo di partenza in radianti
