@@ -1,0 +1,60 @@
+"""
+Take as input a file, with header:
+ncols         886
+nrows         691
+xllcorner     111.975
+yllcorner     -44.525
+cellsize      0.05
+NODATA_value  -9999
+The data is displayed as a matrix of latitude longitude, up to latitude: yllcorner
+Take the mean at each latitude
+Output a file with latitude values and the relative mean
+"""
+
+# variables
+real(double), allocatable :: Tl(:), T(:)
+real :: lat, long_inf, lat_inf, step
+int :: lat_i, nrows, ncols
+# file variables
+char(len=50) :: fileIn_name, fileOut_name, io_msg
+logical :: filecheck
+int :: fileIn_status
+int, parameter :: fileIn=41, fileOut=42
+
+if not open(fileIn):
+    write error
+    return
+
+if fileIn exists:
+    if not open(fileOut, 'REPLACE'):
+        write error
+        return
+else:
+    if not open(fileOut, 'NEW'):
+        write error
+        return
+
+read(fileIn) ncols, nrows, long_inf, lat_inf, step
+if not allocate(T(ncols), Tl(nrows)):
+    write error
+    return
+for lat_i = 1,nrows:
+    if not fileIn_status:
+        write error
+        return
+    read(fileIn) T(ncols)
+    Tl(lat_i) = sum(T) / ncols
+if fileIn_status:
+    write(format) fileIn_name, nrows
+    format ('Worning ',I3,' not ended after ',I3,', last processed line is:')
+    write T(ncols)
+
+    
+lat = latitude_inf + (step*nrows)  # moving latitude north
+write(fileOut) "Average temperature across Australia at each latitude"
+write(fileOut, format) long_inf+(step*nrows), lat, long_inf, lat_inf, step
+format ('In the range latitude: ',F7.3,':',F7.3,' -> ',F7.3,':',F7.3,'with step: ', F4.2)
+write(fileOut) "latitude    temperature"
+for lat_i = 1,nrows:
+    lat = lat - step  # moving south
+    write(fileOut) lat, Tl(lat_i) 

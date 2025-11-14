@@ -2,7 +2,7 @@ PROGRAM tetto
   IMPLICIT NONE
 
   INTEGER :: filestatus, i, dayi, hour, day, day1
-  INTEGER, PARAMETER :: MAX_DAYS=3, unit=42
+  INTEGER, PARAMETER :: MAX_DAYS=3, unit=42, days_of_month=31
   REAL(KIND=8) :: dT(MAX_DAYS)=0, aT(MAX_DAYS)=0, T(24)=0
   REAL(KIND=8) :: Ti
   CHARACTER(len=100) :: io_msg
@@ -21,11 +21,12 @@ PROGRAM tetto
         WRITE (*,*) "Error: too many days: expected up to", MAX_DAYS
         STOP
      END IF
+     
      do_read_24: DO i =1,24
         READ (unit,'(I2,9X,I2,1X,F8.5)', iostat=filestatus) day, hour, Ti
         ! check match of hour and day in file
         ! supposing 31 days in month
-        IF (day /= (day1 + (dayi-1))%31 .OR. hour /= i-1) THEN
+        IF (day /= (day1 + MOD(dayi-1,days_of_month)) .OR. hour /= i-1) THEN
            WRITE (*,*) "Error: mismatch day:", day, "hour:", hour
            STOP
         END IF

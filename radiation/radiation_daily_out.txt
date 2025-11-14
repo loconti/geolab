@@ -1,0 +1,19 @@
+ Worning: number of lines in input file:         1439 does not match the number of minutes in a day
+ 
+ Interpolating from line:         695
+ 695   345.9500
+ 696 i.347.3060
+ 697 i.348.6620
+ 698   350.0180
+ 
+ Interpolating from line:         992
+ 992    24.6547
+ 993 i. 24.2150
+ 994 i. 23.7752
+ 995 i. 23.3355
+ 996 i. 22.8957
+ 997    22.4560
+ 
+Data of incident radiation in date: 21 01 2017
+The total short wave radiation is:   117614.5312 W/m2
+The total long wave radiation is:     -3300.9316 W/m2

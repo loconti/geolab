@@ -1,0 +1,7 @@
+&PARAMLIST
+fileIn_name='monthly_temperature_sample.txt'
+fileLat_name='temperature_latitude.txt'
+fileFilter_name='temperature_filtered.txt'
+fileAvg_name='temperature_averaged.txt'
+avg_dim=9
+/

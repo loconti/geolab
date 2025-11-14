@@ -10,6 +10,7 @@ PROGRAM sensors
   CHARACTER (len=50), PARAMETER :: filename_out='sensors_out.txt'
   CHARACTER (len=50), PARAMETER :: filename_1='Exercises/10486917_4.txt', filename_2='Exercises/10512170_4_new.txt'
 
+  ! try to open first file
   OPEN (unitR1, file=filename_1, iostat=filestatus_1, iomsg=io_msg,&
        status='OLD', action='READ', access='SEQUENTIAL')
   IF (filestatus_1 /= 0) THEN
@@ -17,6 +18,7 @@ PROGRAM sensors
      STOP
   END IF
 
+  ! try to open second file
   OPEN (unitR2, file=filename_2, iostat=filestatus_2, iomsg=io_msg,&
        status='OLD', action='READ', access='SEQUENTIAL')
   IF (filestatus_2 /= 0) THEN
@@ -32,7 +34,6 @@ PROGRAM sensors
   ELSE
      OPEN (unitW, file=filename_out, iostat=filestatus_3, iomsg=io_msg,&
           status='NEW', action='WRITE', access='SEQUENTIAL')
-
   END IF
   IF (filestatus_3 /= 0) THEN
      WRITE (*,*) io_msg
@@ -52,6 +53,7 @@ PROGRAM sensors
   input_loop: DO WHILE (filestatus_1 == 0 .AND. filestatus_2 == 0)
      ! shifting the first read based on the number of the line
      ! counting +1 for the space
+     ! in the format: "(...)" what is in: '...' is written directly in: format_read 
      WRITE (format_read,"('(', I1, 'X,A19,8X,F6.3,8X,F6.3)')") INT(LOG10(REAL(n_lines)))+1+1
      READ(unitR1,format_read,iostat=filestatus_1)&
           datetime_1, T1, RH1
