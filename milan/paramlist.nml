@@ -1,0 +1,7 @@
+&PARAMLIST
+ FILEA_NAME="A-pT.dat                                                                                                                                                                                                ",
+ FILEB_NAME="B-pT.dat                                                                                                                                                                                                ",
+ FILEA_OUT_NAME="A-zpT.dat                                                                                                                                                                                               ",
+ FILEB_OUT_NAME="B-zpT.dat                                                                                                                                                                                               ",
+ FILEAB_OUT_NAME="AB-Dp.dat                                                                                                                                                                                               ",
+ /

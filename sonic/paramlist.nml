@@ -1,7 +1,7 @@
 &PARAMLIST
- PHI=  900.00000000    ,
- THETA=  060.00000000    ,
- PSI=  098.00000000    ,
+ PHI=  30.0000000000000000     ,
+ THETA=  60.0000000000000000     ,
+ PSI=  90.0000000000000000     ,
  FILEIN_NAME="test_allegato.dat                                                                                   ",
  FILEOUT_NAME="wind_out.dat                                                                                        ",
  /

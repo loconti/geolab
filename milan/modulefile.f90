@@ -58,6 +58,10 @@ CONTAINS
        READ (unit,*,iostat=iostat) line_head
        IF (iostat == 0 .AND. LEN(line_head) > 0) THEN  ! until blank line or EOF
           nlines = nlines + 1
+       ELSE IF (iostat /= -1 .AND. iostat /= 0) THEN
+          WRITE (*,*) "Error: file closed during execution of COUNT_LINES"
+          error_i = 3
+          RETURN
        ELSE
           EXIT
        END IF

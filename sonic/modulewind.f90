@@ -2,12 +2,12 @@ MODULE modulewind
   IMPLICIT NONE
 
   INTEGER, PARAMETER :: max_sonic_par=9
-  REAL, PARAMETER :: NAN=99.99 
+  REAL(kind=8), PARAMETER :: NAN=99.99 
   INTEGER :: nan_total=0
-  REAL, DIMENSION(3,3) :: rotation_matrix
+  REAL(kind=8), DIMENSION(3,3) :: rotation_matrix
   
   TYPE :: WIND
-     REAL, DIMENSION(3) :: velocity
+     REAL(kind=8), DIMENSION(3) :: velocity
      REAL :: c
      INTEGER, DIMENSION(max_sonic_par) :: sonic_par  ! accessorial parameters up to 9
   END TYPE WIND
@@ -20,7 +20,8 @@ CONTAINS
     wind_rotate%c = wind_measure%c
     wind_rotate%sonic_par = wind_measure%sonic_par
     ! check for NAN values in any velocity component
-    IF (count(ABS(wind_measure%velocity-NAN) < 1) > 1) THEN
+    IF (count(ABS(wind_measure%velocity-NAN) < 1) > 0) THEN
+       ! if any component is NAN, set all to NAN
        nan_total = nan_total +1
        wind_rotate%velocity = [NAN,NAN,NAN]
        RETURN
@@ -30,8 +31,9 @@ CONTAINS
   END FUNCTION WIND_ROTATE
 
   FUNCTION MATRIX_ROTATE(phi, theta, psi) RESULT(matrix_rotated)
-    REAL, INTENT(in) :: phi, theta, psi
-    REAL, DIMENSION(3,3), INTENT(out) :: matrix_rotated
+    ! initialize the rotation matrix from the three angles in radiants
+    REAL(kind=8), INTENT(in) :: phi, theta, psi
+    REAL(kind=8), DIMENSION(3,3) :: matrix_rotated
     
     matrix_rotated(1,:) = [COS(psi)*COS(phi)-COS(theta)*SIN(phi)*SIN(psi),&
          (-1)*SIN(psi)*COS(phi)-COS(theta)*SIN(phi)*COS(psi), SIN(theta)*SIN(phi)]
